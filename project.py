@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 while True:
     ret, frame = cap.read()
 
@@ -37,6 +37,7 @@ while True:
 canny = cv2.Canny(drawing, 100, 200)
 # cv2.imshow('edge', canny)
 
+
 # CIRCLES
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1.2, 100, 
@@ -53,6 +54,21 @@ if circles is not None:
     for (x, y, r) in circles:
         shapeDisplay = cv2.circle(shapeDisplay, (x, y), r, (0, 255, 0), 5)
         cv2.rectangle(shapeDisplay, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
+
+#LINES
+lines = cv2.HoughLinesP(
+    canny,
+    1.0,
+    np.pi/180,
+    20,
+    minLineLength=40,
+    maxLineGap=10 
+)
+
+lines = [x[0] for x in lines]
+
+for xy in lines:
+    shapeDisplay = cv2.line(shapeDisplay, (xy[0],xy[1]), (xy[2],xy[3]), [0,0,255], thickness=3)
 
 cv2.imshow('gray', gray)
 cv2.imshow('shapes', shapeDisplay)
