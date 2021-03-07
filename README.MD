@@ -11,3 +11,9 @@ Instructions for use:
 3. Press 'e' after you have drawn your objects
 4. If they are not detected properly, press 'r' to redetect, other wise press any other key to see the simulation!
 5. At any time, press 'q' to quit
+
+Future features 
+
+- Springs
+- Multiple balls with collisions
+- Starting velocity arrows
