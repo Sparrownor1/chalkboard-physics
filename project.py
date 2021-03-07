@@ -24,7 +24,7 @@ while True:
         mask = cv2.rectangle(black, (x1, y1), (x2, y2), (255, 255, 255), -1)
 
         frame = cv2.bitwise_and(frame, mask)
-        dislayWithText = cv2.putText(display, "position shapes inside the box", (0, HEIGHT - 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+        displayWithText = cv2.putText(display, "position shapes inside the box", (0, HEIGHT - 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
         displayWithText = cv2.putText(displayWithText, "press e once shapes are drawn", (0, HEIGHT - 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
         cv2.namedWindow('display')
