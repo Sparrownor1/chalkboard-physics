@@ -20,16 +20,18 @@ while True:
         p2 = (x2, y2)
 
         display = cv2.rectangle(frame, p1, p2, (255, 0, 0), 5)
-
         black = cv2.bitwise_xor(display, display)
         mask = cv2.rectangle(black, (x1, y1), (x2, y2), (255, 255, 255), -1)
 
         frame = cv2.bitwise_and(frame, mask)
+        cv2.putText(display, "position shapes inside the box", (0, HEIGHT - 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+        cv2.putText(display, "press e once shapes are drawn", (0, HEIGHT - 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
         cv2.imshow('display', display)
 
         if cv2.waitKey(1) == ord('e'):
             drawing = frame
+            cv2.destroyWindow('display')
             break
         if cv2.waitKey(1) == ord('q'):
             exit()
@@ -78,7 +80,10 @@ while True:
     #cv2.imshow('gray', gray)
     cv2.imshow('shapes', shapeDisplay)
 
-    if cv2.waitKey(0) != ord('r'):
+    k = cv2.waitKey(0)
+    cv2.destroyWindow(shapeDisplay)
+
+    if k != ord('r'):
         break
 
 while True:
@@ -99,10 +104,6 @@ while True:
     cv2.imshow('out', frame)
     if cv2.waitKey(5) == ord('q'):
         break
-
-    
-
-cv2.waitKey(0)
 
 cap.release() 
 cv2.destroyAllWindows()
