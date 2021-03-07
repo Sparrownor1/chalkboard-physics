@@ -24,12 +24,12 @@ while True:
         mask = cv2.rectangle(black, (x1, y1), (x2, y2), (255, 255, 255), -1)
 
         frame = cv2.bitwise_and(frame, mask)
-        cv2.putText(display, "position shapes inside the box", (0, HEIGHT - 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
-        cv2.putText(display, "press e once shapes are drawn", (0, HEIGHT - 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+        dislayWithText = cv2.putText(display, "position shapes inside the box", (0, HEIGHT - 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+        displayWithText = cv2.putText(displayWithText, "press e once shapes are drawn", (0, HEIGHT - 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
         cv2.namedWindow('display')
         cv2.moveWindow('display', 100, 100)
-        cv2.imshow('display', display)
+        cv2.imshow('display', displayWithText)
 
         if cv2.waitKey(1) == ord('e'):
             cv2.destroyWindow('display')
@@ -75,13 +75,13 @@ while True:
     for xy in lines:
         shapeDisplay = cv2.line(shapeDisplay, (xy[0],xy[1]), (xy[2],xy[3]), [0,0,255], thickness=3)
 
-    cv2.putText(shapeDisplay, "press r if all the shapes are not detected", (0, HEIGHT - 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
-    cv2.putText(shapeDisplay, "press any other key to see the simulation", (0, HEIGHT - 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+    texted = cv2.putText(shapeDisplay, "press r if all the shapes are not detected", (0, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+    texted = cv2.putText(texted, "press any other key to see the simulation", (0, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
     #cv2.imshow('gray', gray)
     cv2.namedWindow('shapes')
     cv2.moveWindow('shapes', 100, 100)
-    cv2.imshow('shapes', shapeDisplay)
+    cv2.imshow('shapes', texted)
 
     k = cv2.waitKey(0)
     cv2.destroyWindow("shapes")
