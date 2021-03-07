@@ -72,8 +72,9 @@ while True:
     for xy in lines:
         shapeDisplay = cv2.line(shapeDisplay, (xy[0],xy[1]), (xy[2],xy[3]), [0,0,255], thickness=3)
 
-    cv2.putText(shapeDisplay, "press r if all the shapes are not detected,\n\
-                            press any other key to see the simulation", (WIDTH, HEIGHT), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+    cv2.putText(shapeDisplay, "press r if all the shapes are not detected", (0, HEIGHT - 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+    cv2.putText(shapeDisplay, "press any other key to see the simulation", (0, HEIGHT - 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+
     #cv2.imshow('gray', gray)
     cv2.imshow('shapes', shapeDisplay)
 
