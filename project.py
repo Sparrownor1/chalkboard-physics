@@ -80,7 +80,7 @@ while True:
     cv2.imshow('shapes', shapeDisplay)
 
     k = cv2.waitKey(0)
-    cv2.destroyWindow(shapeDisplay)
+    cv2.destroyWindow("shapes")
 
     if k != ord('r'):
         break

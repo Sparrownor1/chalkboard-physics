@@ -10,6 +10,14 @@ class Ball:
         self.radius = r
 
 
+def doesNormalIntersectLine(startX, startY, endX, endY,pointX, pointY, radius):
+    if pointX - radius > endX: return False
+    if pointX + radius < startX: return False
+    if pointY - radius > endY: return False
+    if pointY + radius < startY: return False
+    return True
+
+
 #return the m and b of a line that caused a collision or NONE if no collision took place
 def isCollision(lines, ball):
     for (startX, startY, endX, endY) in lines:
@@ -27,7 +35,7 @@ def isCollision(lines, ball):
             xCoordOfMinDist = (x0 + m*(y0 - b))/(1 + m**2)
             yCoordOfMinDist = m*xCoordOfMinDist + b
             minDist = sqrt((x0 - xCoordOfMinDist)**2 + (y0 - yCoordOfMinDist)**2)
-        if minDist <= ball.radius:
+        if minDist <= ball.radius and doesNormalIntersectLine(startX, startY, endX, endY, x0, y0, ball.radius):
             return (m, b)
     return None
 
