@@ -30,7 +30,6 @@ while True:
         cv2.imshow('display', display)
 
         if cv2.waitKey(1) == ord('e'):
-            drawing = frame
             cv2.destroyWindow('display')
             break
         if cv2.waitKey(1) == ord('q'):
@@ -38,7 +37,7 @@ while True:
 
     #now drawing is the img with the data for the physics
     # cv2.imshow('frame', frame)
-    canny = cv2.Canny(drawing, 100, 200)
+    canny = cv2.Canny(frame, 100, 200)
     # cv2.imshow('edge', canny)
 
     # CIRCLES
@@ -48,7 +47,7 @@ while True:
 
     gray = cv2.blur(gray, (3,3))
 
-    shapeDisplay = frame
+    shapeDisplay = display
 
     balls = []
 
