@@ -1,6 +1,6 @@
 from math import sqrt
 
-g = 9.8 #(meters per second) per second
+g = 20 #(meters per second) per second
 accelFactor = 1 #adjust this via testing
 
 class Ball:
@@ -43,7 +43,7 @@ def getNormalVector(x0, y0, m, b):
 
 
 #destructvie new ballPX, ballPY, ballVX, ballVY after delta T time has passed
-def takeStep(ball, lines, deltaT = .01):
+def takeStep(ball, lines, deltaT = .03):
     #calling isCollision method to check for intersection
     (px, py) = ball.position[0], ball.position[1]
     (vx, vy) = ball.velocity[0], ball.velocity[1]
@@ -60,4 +60,4 @@ def takeStep(ball, lines, deltaT = .01):
         ball.position[1] += deltaT*ball.velocity[1]
     else:
         #acceleration due to gravity
-        ball.velocity[1] -= g*deltaT
+        ball.velocity[1] += g*deltaT
