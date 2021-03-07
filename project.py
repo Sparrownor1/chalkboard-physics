@@ -27,6 +27,8 @@ while True:
         cv2.putText(display, "position shapes inside the box", (0, HEIGHT - 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
         cv2.putText(display, "press e once shapes are drawn", (0, HEIGHT - 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
+        cv2.namedWindow('display')
+        cv2.moveWindow('display', 100, 100)
         cv2.imshow('display', display)
 
         if cv2.waitKey(1) == ord('e'):
@@ -77,6 +79,8 @@ while True:
     cv2.putText(shapeDisplay, "press any other key to see the simulation", (0, HEIGHT - 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
     #cv2.imshow('gray', gray)
+    cv2.namedWindow('shapes')
+    cv2.moveWindow('shapes', 100, 100)
     cv2.imshow('shapes', shapeDisplay)
 
     k = cv2.waitKey(0)
@@ -100,6 +104,8 @@ while True:
         takeStep(ball, lines)
         print(ball.position)
     #display image
+    cv2.namedWindow('out')
+    cv2.moveWindow('out', 100, 100)
     cv2.imshow('out', frame)
     if cv2.waitKey(5) == ord('q'):
         break
