@@ -1,7 +1,8 @@
 import numpy as np
 import cv2
+from physics import *
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 while True:
     ret, frame = cap.read()
 
@@ -37,7 +38,6 @@ while True:
 canny = cv2.Canny(drawing, 100, 200)
 # cv2.imshow('edge', canny)
 
-
 # CIRCLES
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1.2, 100, 
@@ -47,14 +47,19 @@ gray = cv2.blur(gray, (3,3))
 
 shapeDisplay = frame
 
-if circles is not None:
-    
-    circles = np.round(circles[0, :]).astype("int")
+balls = []
 
+
+if circles is not None:
+    circles = np.round(circles[0, :]).astype("int")
     for (x, y, r) in circles:
         shapeDisplay = cv2.circle(shapeDisplay, (x, y), r, (0, 255, 0), 5)
         cv2.rectangle(shapeDisplay, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
+        balls.append(Ball(x, y, r, 0, 0))
 
+
+else:
+    raise("no circles detected")
 #LINES
 lines = cv2.HoughLinesP(
     canny,
@@ -70,8 +75,29 @@ lines = [x[0] for x in lines]
 for xy in lines:
     shapeDisplay = cv2.line(shapeDisplay, (xy[0],xy[1]), (xy[2],xy[3]), [0,0,255], thickness=3)
 
-cv2.imshow('gray', gray)
+#cv2.imshow('gray', gray)
 cv2.imshow('shapes', shapeDisplay)
+
+cv2.waitKey(0)
+
+while True:
+
+    ret, frame = cap.read()
+    frame = cv2.flip(frame, 1)
+    HEIGHT, WIDTH, _ = frame.shape
+
+    for ball in balls:
+        #1. draw the ball
+        x, y = int(ball.position[0]), int(ball.position[1])
+        cv2.circle(frame, (x, y), int(ball.radius), (255, 0, 0), 5)
+
+        #2. move the ball
+        takeStep(ball, lines)
+        print(ball.position)
+    #display image
+    cv2.imshow('out', frame)
+
+    
 
 cv2.waitKey(0)
 
